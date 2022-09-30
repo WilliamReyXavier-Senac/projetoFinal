@@ -13,7 +13,7 @@ public class Categoria {
     private int id;
     private String nome;
     private char tipo;
-
+    
     /**
      * @return the id
      */
@@ -55,6 +55,7 @@ public class Categoria {
     public void setTipo(char tipo) {
         this.tipo = tipo;
     }
+    
 
  
 }

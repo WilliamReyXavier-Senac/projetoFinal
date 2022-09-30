@@ -14,7 +14,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 public class CategoriaDAO {
-    /*
+    
     public static boolean inserir(Categoria categoria){
         try {
             Connection conexao = Conexao.getConexao();
@@ -29,7 +29,7 @@ public class CategoriaDAO {
         }catch(Exception e) {
             return false;
         }
-    }*/
+    }
     public static boolean alterar(Categoria categoria){
         try {
             Connection con = Conexao.getConexao();
@@ -49,7 +49,7 @@ public class CategoriaDAO {
             return false;
         }
     }
-    /*
+    
     public static boolean excluir(int id){
             try {
             Connection con = Conexao.getConexao();
@@ -108,5 +108,5 @@ public class CategoriaDAO {
     }
     
     
-    */
+    
 }
