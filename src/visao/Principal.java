@@ -94,12 +94,12 @@ public class Principal extends javax.swing.JFrame {
 
     private void btnCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCategoriasActionPerformed
         // TODO add your handling code here:
-        new TelaListaFilme().setVisible(true);
+        new TelaListaCategoria().setVisible(true);
     }//GEN-LAST:event_btnCategoriasActionPerformed
 
     private void btnFilmesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFilmesActionPerformed
         // TODO add your handling code here:
-        new TelaListaCategoria().setVisible(true);
+        new TelaListaFilme().setVisible(true);
     }//GEN-LAST:event_btnFilmesActionPerformed
 
     /**

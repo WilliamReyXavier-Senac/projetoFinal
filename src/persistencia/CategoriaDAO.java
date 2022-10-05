@@ -33,7 +33,7 @@ public class CategoriaDAO {
     public static boolean alterar(Categoria categoria){
         try {
             Connection con = Conexao.getConexao();
-            String sql = "UPDATE categoria SET nome = ?,tipo = ? WHERE id = ?";
+            String sql = "UPDATE categoria SET nome = ?, tipo = ? WHERE id = ?";
             PreparedStatement comando = con.prepareStatement(sql);
             comando.setString(1, categoria.getNome());
             comando.setString(2, String.valueOf(categoria.getTipo()));
@@ -75,6 +75,7 @@ public class CategoriaDAO {
                 c.setId(resultado.getInt("id"));
                 c.setNome(resultado.getString("nome"));
                 c.setTipo(resultado.getString("tipo").charAt(0));
+                categorias.add(c);
             }
             resultado.close();
             comando.close();

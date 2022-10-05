@@ -56,6 +56,44 @@ public class Categoria {
         this.tipo = tipo;
     }
     
-
- 
+    
+    public String getNomeTipo() {
+        return tipo == 'F' ? "Filme" : "Jogo";
+        /*
+        if(tipo == 'F') {
+            return "Filme";
+        } else {
+            return "Jogo";
+        }
+        */
+        
+    }
+    
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        return hash;
+    }
+    @Override
+    public boolean equals(Object obj) {
+        if(this == obj) {
+            return true;
+        }
+        if(obj == null) {
+            return false;
+        }
+        if(getClass() != obj.getClass()) {
+            return false;
+        }
+        final Categoria other = (Categoria) obj;
+        if(this.id != other.id) {
+            return false;
+        }
+        return false;
+    }
+    
+    @Override
+    public String toString() {
+        return nome;
+    }
 }

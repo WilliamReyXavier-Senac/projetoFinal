@@ -23,8 +23,8 @@ public class JogoDAO {
     public static boolean inserir(Jogo jogo) {
         try {
             Connection conexao = Conexao.getConexao();
-            String sql = "INSERT INTO jogo(titulo, descricao, preco, numeroDias, "
-                    + "categoria_id, memoria, tipo) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO jogo(titulo, descricao, preco, numeroDias, categoria_id, memoria, tipo)"
+                    + " VALUES (?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement ps = conexao.prepareStatement(sql);
             ps.setString(1, jogo.getTitulo());
             ps.setString(2, jogo.getDescricao());

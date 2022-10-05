@@ -22,7 +22,7 @@ public class FilmeDAO {
     public static List<Filme> listar() {
         List<Filme> lista = new ArrayList<Filme>();
         try {
-            String sql = "SELECT filme.* categoria.nome as categoria, categoria.tipo FROM filme"
+            String sql = "SELECT filme.*, categoria.nome as categoria, categoria.tipo FROM filme "
                     + "INNER JOIN categoria ON filme.categoria_id = categoria.id";
             Connection conexao = Conexao.getConexao(); Statement st = conexao.createStatement();
             ResultSet rs = st.executeQuery(sql);
@@ -42,7 +42,8 @@ public class FilmeDAO {
                 lista.add(filme);
                 
             }
-            rs.close(); st.close();
+            rs.close();
+            st.close();
             
         } catch(Exception e) {
             System.out.println("FilmeDAO.listar");
@@ -54,14 +55,14 @@ public class FilmeDAO {
 
     public static boolean inserir(Filme filme) {
         try {
-            String sql = "INSERT INTO filme (titulo, descrica, preco, "
+            String sql = "INSERT INTO filme (titulo, descricao, preco, "
                     + "numeroDias, diretor, duracao, categoria_id) VALUES "
                     + "(?, ?, ?, ?, ?, ?, ?)";
             Connection con = Conexao.getConexao();
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, filme.getTitulo());
             ps.setString(2, filme.getDescricao());
-            ps.setString(3, filme.getPreco());
+            ps.setDouble(3, filme.getPreco());
             ps.setInt(4, filme.getNumeroDias());
             ps.setString(5, filme.getDiretor());
             ps.setInt(6, filme.getDuracao());
@@ -72,7 +73,8 @@ public class FilmeDAO {
             return inseridos > 0;
         } catch(Exception e) {
             System.out.println("FilmeDAO.inserir: " + e.getMessage());
-        }   return false;
+        }
+        return false;
     }
     
     public static boolean alterar(Filme filme) {
@@ -84,7 +86,7 @@ public class FilmeDAO {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, filme.getTitulo());
             ps.setString(2, filme.getDescricao());
-            ps.setString(3, filme.getPreco());
+            ps.setDouble(3, filme.getPreco());
             ps.setInt(4, filme.getNumeroDias());
             ps.setString(5, filme.getDiretor());
             ps.setInt(6, filme.getDuracao());

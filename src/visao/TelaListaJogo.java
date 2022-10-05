@@ -6,9 +6,12 @@
 package visao;
 
 import entidades.Jogo;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import persistencia.JogoDAO;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -38,13 +41,23 @@ public class TelaListaJogo extends javax.swing.JFrame {
         btnAlterar = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tabJogos = new javax.swing.JTable();
+        tabJogo = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         btnNovo.setText("Nova");
+        btnNovo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNovoActionPerformed(evt);
+            }
+        });
 
         btnAlterar.setText("Alterar");
+        btnAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlterarActionPerformed(evt);
+            }
+        });
 
         btnExcluir.setText("Excluir");
         btnExcluir.addActionListener(new java.awt.event.ActionListener() {
@@ -53,7 +66,7 @@ public class TelaListaJogo extends javax.swing.JFrame {
             }
         });
 
-        tabJogos.setModel(new javax.swing.table.DefaultTableModel(
+        tabJogo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -69,7 +82,7 @@ public class TelaListaJogo extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tabJogos);
+        jScrollPane1.setViewportView(tabJogo);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -78,14 +91,15 @@ public class TelaListaJogo extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnNovo)
                         .addGap(26, 26, 26)
                         .addComponent(btnAlterar)
                         .addGap(28, 28, 28)
-                        .addComponent(btnExcluir))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(15, Short.MAX_VALUE))
+                        .addComponent(btnExcluir)
+                        .addGap(0, 211, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -104,7 +118,7 @@ public class TelaListaJogo extends javax.swing.JFrame {
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         // TODO add your handling code here:
-        int linha =  tabJogos.getSelectedRow();
+        int linha =  tabJogo.getSelectedRow();
         if(linha == -1) {
             JOptionPane.showMessageDialog(this, "Selecione um jogo para excluir");
         }else {
@@ -125,6 +139,33 @@ public class TelaListaJogo extends javax.swing.JFrame {
             
         }
     }//GEN-LAST:event_btnExcluirActionPerformed
+
+    private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
+        try {
+            // TODO add your handling code here:
+            new TelaCadastroJogo(this).setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(TelaListaJogo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnNovoActionPerformed
+
+    private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
+        // TODO add your handling code here:
+        int linha = tabJogo.getSelectedRow();
+        if(linha == -1) {
+            JOptionPane.showMessageDialog(this, "Selecione uma categoria");
+            
+        } else {
+            TelaCadastroJogo cadastro = null;
+            try {
+                cadastro = new TelaCadastroJogo(this);
+            } catch (SQLException ex) {
+                Logger.getLogger(TelaListaJogo.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            cadastro.setJogo(listaJogos.get(linha));
+            cadastro.setVisible(true);
+        }
+    }//GEN-LAST:event_btnAlterarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -164,7 +205,7 @@ public class TelaListaJogo extends javax.swing.JFrame {
     
     public void listarJogos() {
         listaJogos = JogoDAO.listar();
-        DefaultTableModel modelo= (DefaultTableModel) tabJogos.getModel();
+        DefaultTableModel modelo= (DefaultTableModel) tabJogo.getModel();
         modelo.setRowCount(0);
         for(Jogo j : listaJogos) {
             Object[] linha = {
@@ -183,6 +224,6 @@ public class TelaListaJogo extends javax.swing.JFrame {
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnNovo;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tabJogos;
+    private javax.swing.JTable tabJogo;
     // End of variables declaration//GEN-END:variables
 }

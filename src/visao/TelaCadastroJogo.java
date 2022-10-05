@@ -10,6 +10,7 @@ import entidades.Jogo;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import persistencia.CategoriaDAO;
 import persistencia.JogoDAO;
@@ -23,10 +24,7 @@ public class TelaCadastroJogo extends javax.swing.JFrame {
     private Jogo jogo;
     private TelaListaJogo telaLista;
     
-    /**
-     * Creates new form TelaCadastro
-     */
-    public TelaCadastroJogo() throws SQLException {
+    public TelaCadastroJogo(TelaListaJogo telaLista) throws SQLException {
         initComponents();
         this.jogo = new Jogo(new Categoria());
         this.telaLista = telaLista;
@@ -82,7 +80,7 @@ public class TelaCadastroJogo extends javax.swing.JFrame {
 
         jTextField3.setText("jTextField3");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel1.setText("Cadastro de Jogos");
@@ -241,69 +239,62 @@ public class TelaCadastroJogo extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaCadastroJogo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaCadastroJogo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaCadastroJogo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaCadastroJogo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    new TelaCadastroJogo().setVisible(true);
-                } catch (SQLException ex) {
-                    Logger.getLogger(TelaCadastroJogo.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(TelaCadastroJogo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(TelaCadastroJogo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(TelaCadastroJogo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(TelaCadastroJogo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                    //new TelaCadastroJogo().setVisible(true);
+//  
+//            }
+//        });
+//    }
     
     private void inserir() {
         if(JogoDAO.inserir(jogo)) {
-            JOptionPane.showMessageDialog(this,
-                    "Jogo inserido com sucesso!");
+            JOptionPane.showMessageDialog(this, "Jogo inserido com sucesso!");
             telaLista.listarJogos();
             dispose();
         } else {
-            JOptionPane.showMessageDialog(this,
-                    "Erro ao inserir jogo!");
+            JOptionPane.showMessageDialog(this, "Erro ao inserir jogo!");
         }
     }
     
     private void alterar() {
         if(JogoDAO.alterar(jogo)) {
-            JOptionPane.showMessageDialog(this,
-                    "Jogo alterado com sucesso!");
+            JOptionPane.showMessageDialog(this, "Jogo alterado com sucesso!");
             telaLista.listarJogos();
             dispose();
         } else {
-            JOptionPane.showMessageDialog(this,
-                    "Erro ao alterar jogo!");
+            JOptionPane.showMessageDialog(this, "Erro ao alterar jogo!");
         }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGravar;
-    private javax.swing.JComboBox<String> cmbCategoria;
+    private javax.swing.JComboBox<Categoria> cmbCategoria;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;

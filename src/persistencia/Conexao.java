@@ -17,7 +17,7 @@ public class Conexao {
 
     public static Connection getConexao() {
         try {
-            return DriverManager.getConnection("jdbc:mysql://localhost:3306/projeto", "root", "123qwe@");
+            return DriverManager.getConnection("jdbc:mysql://localhost:3306/projeto", "admin", "admin");
         }catch(Exception erro) {
             throw new RuntimeException(erro);
         }

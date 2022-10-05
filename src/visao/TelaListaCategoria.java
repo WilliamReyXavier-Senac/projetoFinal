@@ -40,11 +40,21 @@ public class TelaListaCategoria extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tabCategorias = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         btnNovo.setText("Nova");
+        btnNovo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNovoActionPerformed(evt);
+            }
+        });
 
         btnAlterar.setText("Alterar");
+        btnAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlterarActionPerformed(evt);
+            }
+        });
 
         btnExcluir.setText("Excluir");
         btnExcluir.addActionListener(new java.awt.event.ActionListener() {
@@ -125,6 +135,24 @@ public class TelaListaCategoria extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Selecione uma categoria para excluir");
         }
     }//GEN-LAST:event_btnExcluirActionPerformed
+
+    private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
+        // TODO add your handling code here:
+        new TelaCadastroCategoria(this).setVisible(true);
+    }//GEN-LAST:event_btnNovoActionPerformed
+
+    private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
+        // TODO add your handling code here:
+        int linha = tabCategorias.getSelectedRow();
+        if(linha == -1) {
+            JOptionPane.showMessageDialog(this, "Selecione uma categoria");
+        }else {
+            Categoria categoria = categorias.get(linha);
+            TelaCadastroCategoria cadCategoria = new TelaCadastroCategoria(this);
+            cadCategoria.setCategoria(categoria);
+            cadCategoria.setVisible(true);
+        }
+    }//GEN-LAST:event_btnAlterarActionPerformed
 
     /**
      * @param args the command line arguments
